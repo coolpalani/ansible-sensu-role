@@ -19,8 +19,8 @@
   service: name=sensu-server state=started
 
 - name: enable-sensu-api
-  service: name=redis-api args=defaults enabled=yes
+  service: name=sensu-api args=defaults enabled=yes
 
 - name: start-sensu-api
-  service: name=redis-api state=started
+  service: name=sensu-api state=started
 

@@ -1,12 +1,13 @@
 ---
-- name: Download rabbitmq public key
-  get_url: url=http://www.rabbitmq.com/rabbitmq-signing-key-public.asc dest=/tmp validate_certs=no
-
 - name: Install rabbitmq public key
-  apt_key: file=/tmp/rabbitmq-signing-key-public.asc
+  apt_key: url=http://www.rabbitmq.com/rabbitmq-signing-key-public.asc state=present
 
 - name: Adding rabbitmq repo
-  lineinfile: dest=/etc/apt/sources.list line="deb https://www.rabbitmq.com/debian/ testing main"
+  copy:
+    src=rabbitmq.list
+    dest=/etc/apt/sources.list.d/
+    backup=yes
+  register: aptrepo
 
 - name: Update apt repos
   apt: update_cache=yes

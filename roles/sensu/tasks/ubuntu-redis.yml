@@ -1,6 +1,7 @@
 ---
-- name: YAAU (Yet Another Apt Update)
+- name: YAAU (Yet Another Apt Update) for redis
   apt: update_cache=yes
+  when: aptrepo.changed
 
 - name: Install redis
   apt: package=redis-server state=present
