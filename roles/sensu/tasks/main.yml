@@ -5,3 +5,6 @@
 
 - include: ubuntu-rabbitmq.yml
   when: ansible_os_family == "Debian"
+
+- include: ubuntu-redis.yml
+  when: ansible_os_family == "Debian"

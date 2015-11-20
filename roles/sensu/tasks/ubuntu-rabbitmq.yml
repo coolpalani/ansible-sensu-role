@@ -16,5 +16,17 @@
   notify: enable-rabbitmq
   notify: start-rabbitmq
 
+- name: Add rabbitmq vhost via rabbitmq extra module
+  rabbitmq_vhost: name=/sensu state=present
+
+- name: Add rabbitmq user via rabbitmq extra module
+  rabbitmq_user: user=sensu
+                 password=secret
+                 vhost=/sensu
+                 configure_priv=.*
+                 read_priv=.*
+                 write_priv=.*
+                 state=present
+  
 - name: Cleanup rabbitmq downloads
   file: path=/tmp/rabbitmq-signing-key-public.asc state=absent

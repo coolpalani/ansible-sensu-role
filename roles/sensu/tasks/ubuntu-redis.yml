@@ -1,0 +1,12 @@
+---
+- name: YAAU (Yet Another Apt Update)
+  apt: update_cache=yes
+
+- name: Install redis
+  apt: package=redis-server state=present
+
+- name: Enable redis at startup
+  service: name=redis-server args=defaults enabled=yes
+
+- name: Start redis
+  service: name=redis-server state=started
