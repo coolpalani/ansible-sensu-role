@@ -5,8 +5,11 @@
 - name: Install sensu public key
   apt_key: file=/tmp/pubkey.gpg
 
-- name: Adding rabbitmq repo
-  lineinfile: dest=/etc/apt/sources.list line="deb https://repositories.sensuapp.org/apt sensu main"
+- name: Create additional repo file
+  file: path=/etc/apt/sources.list.d/sensu.list state=file
+
+- name: Adding sensu repo
+  lineinfile: dest=/etc/apt/sources.list.d/sensu.list line="deb https://repositories.sensuapp.org/apt sensu main"
 
 - name: Update apt repos
   apt: update_cache=yes
@@ -14,13 +17,13 @@
 - name: Install sensu
   apt: name=sensu state=present
 
-- name: Create localhost config file
+- name: Create localhost sensu config file
   get_url: url=http://sensuapp.org/docs/0.21/files/config.json dest=/etc/sensu validate_certs=no
 
-- name: Create example memory check
+- name: Create example sensu  memory check
   get_url: url=http://sensuapp.org/docs/0.21/files/check_memory.json dest=/etc/sensu/conf.d validate_certs=no
 
-- name: Create example handler
+- name: Create example sensu  handler
   get_url: url=http://sensuapp.org/docs/0.21/files/default_handler.json dest=/etc/sensu/conf.d validate_certs=no
 
 - name: Change sensu file ownership
