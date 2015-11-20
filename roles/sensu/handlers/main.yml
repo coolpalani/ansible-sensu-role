@@ -1,7 +1,7 @@
 ---
 # handlers file for sensu
 - name: enable-rabbitmq
-  command: update-rc.d rabbitmq-server defaults
+  service: name=rabbitmq-server arg=defaults enabled=yes
 
 - name: start-rabbitmq
   service: rabbitmq-server state=started

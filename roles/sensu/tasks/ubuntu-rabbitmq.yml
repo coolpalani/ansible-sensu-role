@@ -13,8 +13,9 @@
 
 - name: Install rabbitmq
   apt: name=rabbitmq-server state=present
-  notify: enable-rabbitmq
-  notify: start-rabbitmq
+  notify:
+   - enable-rabbitmq
+   - start-rabbitmq
 
 - name: Add rabbitmq vhost via rabbitmq extra module
   rabbitmq_vhost: name=/sensu state=present
