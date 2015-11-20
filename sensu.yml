@@ -1,0 +1,8 @@
+---
+- hosts: sensu-test
+  sudo: yes
+  roles:
+     - sensu
+
+  handlers:
+    - include: roles/sensu/handlers/main.yml

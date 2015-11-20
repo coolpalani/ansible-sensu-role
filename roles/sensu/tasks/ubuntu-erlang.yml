@@ -10,3 +10,6 @@
 
 - name: Install erlang
   apt: name=erlang state=present
+
+- name: Cleanup install
+  file: path=/tmp/erlang-solutions_1.0_all.deb state=absent

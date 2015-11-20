@@ -13,3 +13,8 @@
 
 - name: Install rabbitmq
   apt: name=rabbitmq-server state=present
+  notify: enable-rabbitmq
+  notify: start-rabbitmq
+
+- name: Cleanup rabbitmq downloads
+  file: path=/tmp/rabbitmq-signing-key-public.asc state=absent
