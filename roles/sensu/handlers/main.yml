@@ -4,4 +4,23 @@
   service: name=rabbitmq-server arg=defaults enabled=yes
 
 - name: start-rabbitmq
-  service: rabbitmq-server state=started
+  service: rabbitmq-server state=starte
+
+- name: enable-redis
+  service: name=redis-server args=defaults enabled=yes
+
+- name: start-redis
+  service: name=redis-server state=started
+
+- name: enable-sensu
+  service: name=sensu-server args=defaults enabled=yes
+
+- name: start-sensu
+  service: name=sensu-server state=started
+
+- name: enable-sensu-api
+  service: name=redis-api args=defaults enabled=yes
+
+- name: start-sensu-api
+  service: name=redis-api state=started
+

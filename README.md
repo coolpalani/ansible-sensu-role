@@ -7,9 +7,9 @@ As with all the things, rather than manually installing, I am creating this role
 - erlang install (done)
 - rabbitmq install (done)
 - redis install (done)
-- setup sensu repositories
-- install sensu
-- configure sensu
+- setup sensu repositories (done/not tested)
+- install sensu (done/not tested)
+- configure sensu (done/not tested)
 - install sensu client
 - install sensu dashboard
 - QA

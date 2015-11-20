@@ -1,0 +1,35 @@
+---
+- name: Download sensu public key
+  get_url: url=http://repositories.sensuapp.org/apt/pubkey.gpg dest=/tmp validate_certs=no
+
+- name: Install sensu public key
+  apt_key: file=/tmp/pubkey.gpg
+
+- name: Adding rabbitmq repo
+  lineinfile: dest=/etc/apt/sources.list line="deb https://repositories.sensuapp.org/apt sensu main"
+
+- name: Update apt repos
+  apt: update_cache=yes
+
+- name: Install sensu
+  apt: name=sensu state=present
+
+- name: Create localhost config file
+  get_url: url=http://sensuapp.org/docs/0.21/files/config.json dest=/etc/sensu validate_certs=no
+
+- name: Create example memory check
+  get_url: url=http://sensuapp.org/docs/0.21/files/check_memory.json dest=/etc/sensu/conf.d validate_certs=no
+
+- name: Create example handler
+  get_url: url=http://sensuapp.org/docs/0.21/files/default_handler.json dest=/etc/sensu/conf.d validate_certs=no
+
+- name: Change sensu file ownership
+  file: path=/etc/sensu owner=sensu group=sensu recurse=yes
+  notify:
+   - enable-sensu
+   - enable-sensu-api
+   - start-sensu
+   - start-sensu-api
+
+- name: Clean up sensu downloads
+  file: path=/tmp/pubkey.gpg state=absent

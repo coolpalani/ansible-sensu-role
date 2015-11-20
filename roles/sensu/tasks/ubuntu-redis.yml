@@ -4,9 +4,6 @@
 
 - name: Install redis
   apt: package=redis-server state=present
-
-- name: Enable redis at startup
-  service: name=redis-server args=defaults enabled=yes
-
-- name: Start redis
-  service: name=redis-server state=started
+  notify:
+   - enable-redis
+   - start-redis
